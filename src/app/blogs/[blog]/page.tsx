@@ -103,10 +103,10 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
    
  
               <li
-                className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md shrink-0 w-[90%]"
+                className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md  w-[90%] break-words"
                 key={item.id}
               >
-            <UserCheck className="inline mr-4 text-blue-600" /> {item.comment.trim()}
+            <UserCheck className="inline mr-4 text-blue-600 mb-1" /> {item.comment.trim()}
               </li>
     
             ))}
