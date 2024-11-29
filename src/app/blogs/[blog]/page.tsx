@@ -26,7 +26,7 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
   const [isDisable, setIsDisable] = useState<boolean>(true);
 
   useEffect(() => {
-    if (commentVal) {
+    if (commentVal.trim()) {
       setIsDisable(false);
     } else {
       setIsDisable(true);
