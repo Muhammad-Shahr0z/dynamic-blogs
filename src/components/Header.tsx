@@ -14,8 +14,8 @@ import { CircleUserRound, FileText, House, Info } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="mb-8 h-[65px] bg-transparent backdrop-blur-md shadow-md sticky top-0 z-50 caret-transparent dark:border-b-[1px] border-gray-600">
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
+    <header className="mb-8 h-[65px] bg-transparent backdrop-blur-md shadow-md sticky top-0 z-50 caret-transparent dark:border-b-[1px] border-gray-600 flex items-center justify-center">
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-0">
         {/* Logo */}
         <div className="text-xl font-bold text-blue-600 dark:text-white hover:text-black">
           <Link href="/">SherryBlog</Link>
