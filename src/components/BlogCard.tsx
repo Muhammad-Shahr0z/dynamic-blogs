@@ -7,7 +7,7 @@ interface BlogCardProps {
   title: string;
   description: string;
   date: string;
-  id: any;
+  id:string|undefined;
 }
 
 const BlogCard = ({

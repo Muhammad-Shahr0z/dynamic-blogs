@@ -10,7 +10,7 @@ import {
 
 import { ModeToggle } from "@/components/drop";
 import { Button } from "@/components/ui/button";
-import { CircleUserRound, FileText, House, Info, SquarePen } from "lucide-react";
+import { CircleUserRound, FileText, House, Info} from "lucide-react";
 
 const Header = () => {
   return (

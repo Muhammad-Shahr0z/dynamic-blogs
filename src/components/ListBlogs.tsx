@@ -2,7 +2,7 @@ import Image from "next/image";
 interface CardInterface {
   author: string;
   title: string;
-  description: String;
+  description: string;
   image: string;
 }
 

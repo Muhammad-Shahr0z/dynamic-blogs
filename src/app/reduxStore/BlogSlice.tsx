@@ -6,7 +6,7 @@ interface Blog {
   title: string;
   description: string;
   date: string;
-  id?: any;
+  id?: string;
 }
 interface Comment {
   id: string;

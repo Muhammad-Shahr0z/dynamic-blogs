@@ -80,3 +80,11 @@
   background-color: rgba(0, 0, 0, 0.1); /* Scrollbar track color */
   border-radius: 20px; /* Rounded corners */
 }
+
+*{
+  caret-color: transparent;
+}
+
+input{
+  caret-color: gray;
+}

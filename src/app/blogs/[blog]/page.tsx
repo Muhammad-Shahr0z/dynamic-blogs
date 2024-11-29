@@ -9,7 +9,7 @@ import { useAppDispatch } from "@/app/reduxStore/hooks";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
 import { SendHorizontal, UserCheck } from "lucide-react";
 
-const bloggers = ({ params }: any) => {
+const Bloggers = ({ params }:{ params: { blog: string } }) => {
   interface Comment {
     id: string;
     comment: string;
@@ -116,4 +116,4 @@ const bloggers = ({ params }: any) => {
   );
 };
 
-export default bloggers;
+export default Bloggers;

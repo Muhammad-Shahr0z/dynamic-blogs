@@ -13,7 +13,7 @@ const AboutPage = () => {
         knowledge-sharing, SherryBlog is all about delivering high-quality
         content that inspires, informs, and entertains. Whether you're here to
         read about the latest trends, explore insightful articles, or find
-        motivation for your personal and professional journey, we’ve got you
+        motivation for your personal and professional journey, we ve got you
         covered.
       </p>
 

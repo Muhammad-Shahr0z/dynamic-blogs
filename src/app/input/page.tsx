@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { addBlog } from "../reduxStore/BlogSlice";
 import { useAppDispatch } from "../reduxStore/hooks";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,7 +24,7 @@ const BlogInputCard = () => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date().toLocaleString());
 
-  const LoadImage = (e: any) => {
+  const LoadImage = (e:React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const imageURL: string = URL.createObjectURL(file);
@@ -34,7 +34,7 @@ const BlogInputCard = () => {
     }
   };
 
-  const FormHandler = (e: any) => {
+  const FormHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const NewDate = new Date().toLocaleString();
@@ -80,10 +80,11 @@ const BlogInputCard = () => {
       <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
         Add Blog Post
       </h2>
-      <form onSubmit={(e) => FormHandler(e)} className="space-y-4">
+      <form onSubmit={(e:FormEvent<HTMLFormElement>) => FormHandler(e)} className="space-y-4">
         <input
           ref={fileInputRef}
           type="file"
+          accept="image/*"
           className="w-full p-2 border dark:bg-gray-600 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={(e) => LoadImage(e)}
           required
@@ -92,7 +93,7 @@ const BlogInputCard = () => {
           type="text"
           placeholder="Author Name"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:bg-gray-600 focus:ring-blue-500"
-          onChange={(e: any) => setAurthor(e.target.value)}
+          onChange={(e:React.ChangeEvent<HTMLInputElement>) => setAurthor(e.target.value)}
           value={author}
           required
         />
@@ -100,7 +101,7 @@ const BlogInputCard = () => {
           type="text"
           placeholder="Blog Title"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:bg-gray-600 focus:ring-blue-500"
-          onChange={(e: any) => setTitle(e.target.value)}
+          onChange={(e:React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           value={title}
           required
         />
@@ -108,7 +109,7 @@ const BlogInputCard = () => {
           placeholder="Blog Description"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:bg-gray-600 focus:ring-blue-500 resize-none"
           rows={4}
-          onChange={(e: any) => setDescription(e.target.value)}
+          onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
           value={description}
           required
         ></textarea>
