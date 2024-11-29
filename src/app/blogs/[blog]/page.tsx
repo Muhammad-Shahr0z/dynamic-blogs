@@ -65,7 +65,7 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
         </span>
       </div>
 
-      <div className="max-w-lg mx-auto p-4 border border-gray-300 rounded-md shadow-md min-w-[100%]">
+      <div className="max-w-[100%] mx-auto p-4 border border-gray-300 rounded-md shadow-md min-w-[100%]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Comments</h2>
           <div className="flex items-center space-x-2">
@@ -100,10 +100,9 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
           {useCommentSelector
             .filter((item) => item.id === DynamicId)
             .map((item) => (
-   
  
               <li
-                className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md  w-[90%] break-words"
+                className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md w-[100%] break-words"
                 key={item.id}
               >
             <UserCheck className="inline mr-4 text-blue-600 mb-1" /> {item.comment.trim()}
