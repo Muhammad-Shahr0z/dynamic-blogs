@@ -87,39 +87,37 @@ const Header = () => {
                 <div className="px-4 pb-3 text-xl font-semibold flex flex-col items-center gap-4 mt-10">
                   <Link
                     href="/"
-                    className="block py-2 text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     Home
                   </Link>
                   <Link
                     href="/about"
-                    className="block py-2 text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     About
                   </Link>
                   <Link
                     href="/blogs"
-                    className="block py-2 text-3xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block text-3xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     Blogs
                   </Link>
-                  <Link
-                    href="/contact"
-                    className=" hover:text-blue-600 text-3xl border-b-2 border-transparent hover:border-[unset]"
-                  >
-                    <span className="flex gap-1 justify-center items-center">
-                      Contact
-                    </span>
-                  </Link>
 
                   <Link
-                    href="/input"
-                    className=" hover:text-blue-600 text-3xl border-b-2 border-transparent hover:border-[unset]"
+                    href="/contact"
+                    className="block text-3xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
-                    <span className="flex gap-1 justify-center items-center">
-                 Create Blogs
-                    </span>
+                    Contact Us
                   </Link>
+                  <Link
+                    href="/input"
+                    className="block text-3xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                  >
+                  Create Blog
+                  </Link>
+
+        
                   <div className="mt-4 space-y-2">
                     <div className="flex gap-4">
                       <Button className="text-2xl w-44 h-14 tracking-widest">Sign In</Button>
