@@ -10,7 +10,7 @@ import {
 
 import { ModeToggle } from "@/components/drop";
 import { Button } from "@/components/ui/button";
-import { CircleUserRound, FileText, House, Info} from "lucide-react";
+import { CircleUserRound, FileText, House, Info } from "lucide-react";
 
 const Header = () => {
   return (
@@ -38,8 +38,8 @@ const Header = () => {
 
           <Link href="/blogs" className=" hover:text-blue-600">
             <span className="flex gap-1 justify-center items-center">
-            <FileText className="inline text-blue-600 dark:text-white"/>
-    Blogs
+              <FileText className="inline text-blue-600 dark:text-white" />
+              Blogs
             </span>
           </Link>
 
@@ -77,47 +77,56 @@ const Header = () => {
           <SheetContent>
             <SheetHeader>
               <SheetTitle>
-                <div className="flex justify-between items-center mt-6">
-                  <strong className="tracking-widest">SherryBlogs</strong>
+                <div className="flex justify-between items-center mt-14">
+                  <strong className="text-2xl">SherryBlogs</strong>
                   <ModeToggle />
                 </div>
               </SheetTitle>
 
               <SheetDescription>
-                <div className="px-4 pb-3 text-xl font-semibold flex flex-col items-center">
+                <div className="px-4 pb-3 text-xl font-semibold flex flex-col items-center gap-4 mt-10">
                   <Link
                     href="/"
-                    className="block py-2 hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block py-2 text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     Home
                   </Link>
                   <Link
                     href="/about"
-                    className="block py-2 hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block py-2 text-3xl hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     About
                   </Link>
                   <Link
                     href="/blogs"
-                    className="block py-2  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className="block py-2 text-3xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
                     Blogs
                   </Link>
                   <Link
                     href="/contact"
-                    className=" hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
+                    className=" hover:text-blue-600 text-3xl border-b-2 border-transparent hover:border-[unset]"
                   >
                     <span className="flex gap-1 justify-center items-center">
                       Contact
                     </span>
                   </Link>
+
+                  <Link
+                    href="/input"
+                    className=" hover:text-blue-600 text-3xl border-b-2 border-transparent hover:border-[unset]"
+                  >
+                    <span className="flex gap-1 justify-center items-center">
+                 Create Blogs
+                    </span>
+                  </Link>
                   <div className="mt-4 space-y-2">
                     <div className="flex gap-4">
-                      <Button className="text-xs">Sign In</Button>
-
+                      <Button className="text-2xl w-44 h-14 tracking-widest">Sign In</Button>
                     </div>
                   </div>
                 </div>
+
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
