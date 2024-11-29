@@ -25,7 +25,7 @@ const LandingPage = () => {
           </p>
           <button className="mt-4 px-4 py-2 font-medium border rounded-full transition-all hover:bg-opacity-20 hover:bg-slate-400">
             <Link href={"/input"} className="flex justify-center items-center gap-2">
-            <SquarePen className="text-blue-600 dark:text-white" />
+            <SquarePen className="text-blue-600"/>
             <span>Create Blogs</span>
             </Link>
           </button>
