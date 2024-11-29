@@ -26,13 +26,16 @@ const BlogInputCard = () => {
 
   const LoadImage = (e:React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const imageURL: string = URL.createObjectURL(file);
-      setImage(imageURL);
-    } else {
-      console.error("No file");
-    }
-  };
+    if (file && !file.type.startsWith("image/")) {
+      alert("Only image files are allowed!");
+      e.target.value = "";
+    }else{
+      if(file){
+        const imageURL: string = URL.createObjectURL(file);
+         setImage(imageURL);  
+      
+      }
+  }}
 
   const FormHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
