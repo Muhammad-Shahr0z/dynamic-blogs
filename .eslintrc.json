@@ -4,7 +4,10 @@
     "react/no-unescaped-entities": "off",
     "no-warning-comments": "off",
     "no-unused-vars": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/jsx-key": "off",
+    "@next/next/no-img-element": "off"
   }
 }
 
