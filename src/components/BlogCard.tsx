@@ -1,7 +1,7 @@
 import { removeBlog } from "@/app/reduxStore/BlogSlice";
 import { useAppDispatch } from "@/app/reduxStore/hooks";
 import Image from "next/image";
-import Link from "next/link";
+
 
 interface BlogCardProps {
   image: string;

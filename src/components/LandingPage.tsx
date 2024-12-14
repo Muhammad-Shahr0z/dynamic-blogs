@@ -4,13 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Privacy from "./Privacy";
 import { FileText, ShieldQuestion, SquarePen } from "lucide-react";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+
 
 const LandingPage = () => {
   return (

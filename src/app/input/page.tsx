@@ -1,14 +1,13 @@
 "use client";
 
-
-import { FormEvent, use, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { addBlog } from "../reduxStore/BlogSlice";
 import { useAppDispatch } from "../reduxStore/hooks";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { useUser } from '@clerk/clerk-react';
-import { UserResource } from "@clerk/types";
+
 
 
 const BlogInputCard =  () => {
@@ -16,13 +15,13 @@ const BlogInputCard =  () => {
 
   interface Blog {
     image: string;
-    author: any;
+    author: any; // eslint-disable-line @typescript-eslint/no-explicit-any
     title: string;
     description: string;
     date: string;
   }
 
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [author, SetAuthor] = useState<any>(null);
   const { user } = useUser();
 

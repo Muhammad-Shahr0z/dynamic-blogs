@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from "@/app/reduxStore/hooks";
 import { addComment, deleteComment } from "@/app/reduxStore/CommentSlice";
 
 const Bloggers = ({ params }: { params: { blog: string } }) => {
-  const [author, SetAuthor] = useState<any>(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [SetAuthor] = useState<any>(null);
 
   const { user } = useUser();
   useEffect(() => {
@@ -116,9 +117,10 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
             .filter((item) => item.blogId === DynamicId)
             .map((item) => (
               <div>
+                Key={item.id}
                 <li
                   className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md w-[100%] break-words"
-                  key={item.id}
+          
                 >
                   <span className="text-sm flex justify-start gap-2 mb-4 items-center">
                     {user ? (
