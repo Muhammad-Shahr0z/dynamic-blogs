@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import {
@@ -13,16 +13,12 @@ import {
 import { ModeToggle } from "@/components/drop";
 import { Button } from "@/components/ui/button";
 import { CircleUserRound, FileText, House, Info } from "lucide-react";
-import { SignInButton } from "@clerk/nextjs";
-import { UserButton } from '@clerk/clerk-react';
-import { useUser } from '@clerk/clerk-react';
-
+// import { SignInButton } from "@clerk/nextjs";
+// import { UserButton } from '@clerk/clerk-react';
+// import { useUser } from '@clerk/clerk-react';
 
 const Header = () => {
-
-
-
-  const { user } = useUser();
+  // const { user } = useUser();
 
   return (
     <header className="mb-8 h-[65px] bg-transparent backdrop-blur-md shadow-md sticky top-0 z-50 caret-transparent dark:border-b-[1px] border-gray-600 flex items-center justify-center">
@@ -64,23 +60,21 @@ const Header = () => {
 
         {/* Buttons */}
         <div className="hidden md:flex gap-2 items-center">
+          {!true ? (
+            // <SignInButton >
+            <Button className="bg-blue-600 dark:bg-white">Sign In</Button>
+          ) : (
+            // </SignInButton >
 
+            <div className="flex justify-center items-center gap-2">
+              <p className="text-xl font-semibold text-blue-600 border-b border-black">
+                {user?.firstName}
+              </p>
+              {/* <UserButton/> */}
+            </div>
+          )}
 
-        {!user ? (
-        <SignInButton >
-          <Button className="bg-blue-600 dark:bg-white">Sign In</Button>
-        </SignInButton >
- 
-      ) : (
-  
-        <div className="flex justify-center items-center gap-2">
-          <p className="text-xl font-semibold text-blue-600 border-b border-black">{user?.firstName}</p>
-          <UserButton/>
-        </div>
-
-      )}
-
-          <ModeToggle/>
+          <ModeToggle />
         </div>
 
         <Sheet>
@@ -105,7 +99,7 @@ const Header = () => {
               <SheetTitle>
                 <div className="flex justify-between items-center mt-14">
                   <strong className="text-2xl">SherryBlogs</strong>
-                  <ModeToggle/>
+                  <ModeToggle />
                 </div>
               </SheetTitle>
 
@@ -140,19 +134,13 @@ const Header = () => {
                     href="/input"
                     className="block text-xl  hover:text-blue-600 border-b-2 border-transparent hover:border-[unset]"
                   >
-                  Create Blog
+                    Create Blog
                   </Link>
 
-        
                   <div className="mt-4 space-y-2">
-                    <div className="flex gap-4">
-              
- 
-
-                    </div>
+                    <div className="flex gap-4"></div>
                   </div>
                 </div>
-
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
