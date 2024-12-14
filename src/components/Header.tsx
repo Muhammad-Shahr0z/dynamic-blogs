@@ -57,25 +57,23 @@ const Header = () => {
             </span>
           </Link>
         </nav>
+{/* Buttons */}
+<div className="hidden md:flex gap-2 items-center">
+  {!user ? (
+    <SignInButton>
+      <Button className="bg-blue-600 dark:bg-white">Sign In</Button>
+    </SignInButton>
+  ) : (
+    <div className="flex justify-center items-center gap-2">
+      <p className="text-xl font-semibold text-blue-600 border-b border-black">
+        {user?.firstName}
+      </p>
+      <UserButton />
+    </div>
+  )}
 
-        {/* Buttons */}
-        <div className="hidden md:flex gap-2 items-center">
-          {!true ? (
-            // <SignInButton >
-            <Button className="bg-blue-600 dark:bg-white">Sign In</Button>
-          ) : (
-            // </SignInButton >
-
-            <div className="flex justify-center items-center gap-2">
-              <p className="text-xl font-semibold text-blue-600 border-b border-black">
-                {user?.firstName}
-              </p>
-              <UserButton/>
-            </div>
-          )}
-
-          <ModeToggle />
-        </div>
+  <ModeToggle />
+</div>
 
         <Sheet>
           <SheetTrigger className="md:hidden flex items-center justify-between space-x-4">
