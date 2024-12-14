@@ -6,14 +6,13 @@ import { RootState } from "../reduxStore/Store";
 import BlogCard from "@/components/BlogCard";
 
 const BlogList = () => {
-  const blogs = useAppSelector((state: RootState) => state.blog);
+  const blogs = useAppSelector((state: RootState) => state.blog.blog);
 
 
 
   return (
 <div>
 
-  
  
 
   {blogs.length >0 && (

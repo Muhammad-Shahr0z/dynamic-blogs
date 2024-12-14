@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 
+
 interface Blog {
   image: string;
   author: string;
@@ -7,19 +8,15 @@ interface Blog {
   description: string;
   date: string;
   id?: string;
-}
-interface Comment {
-  id: string;
-  comment: string;
+
 }
 
 interface initialState {
-  comments: Comment[];
   blog: Blog[];
+
 }
 
 const initialState: initialState = {
-  comments: [],
   blog: [
     {
       image: "/ai.jpg",
@@ -86,6 +83,7 @@ Optimized for Performance: By purging unused CSS, Tailwind reduces the final CSS
       id: "2",
     },
   ],
+
 };
 
 export const blogSlice = createSlice({
@@ -98,11 +96,9 @@ export const blogSlice = createSlice({
     removeBlog: (state, action: PayloadAction<{ id: string }>) => {
       state.blog = state.blog.filter((blog) => blog.id !== action.payload.id);
     },
-    addComments: (state, action: PayloadAction<Comment>) => {
-      state.comments.push(action.payload);
-    },
+
   },
 });
 
-export const { addBlog, addComments,removeBlog } = blogSlice.actions;
+export const { addBlog,removeBlog,} = blogSlice.actions;
 export default blogSlice.reducer;

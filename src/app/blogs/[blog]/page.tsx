@@ -1,19 +1,18 @@
 "use client";
-import { addComments, removeBlog } from "@/app/reduxStore/BlogSlice";
-import { useAppSelector } from "@/app/reduxStore/hooks";
+
 import { RootState } from "@/app/reduxStore/Store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/app/reduxStore/hooks";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
-import { SendHorizontal, UserCheck } from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
+import { useAppDispatch, useAppSelector } from "@/app/reduxStore/hooks";
+import { addComment, deleteComment } from "@/app/reduxStore/CommentSlice";
 
 const Bloggers = ({ params }: { params: { blog: string } }) => {
   const [author, SetAuthor] = useState<any>(null);
 
   const { user } = useUser();
-
   useEffect(() => {
     if (user) {
       SetAuthor(user);
@@ -21,24 +20,13 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
       SetAuthor("User");
     }
   }, [user]);
-
-  interface Comment {
-    id: string;
-    comment: string;
-  }
- 
   const DynamicId = params.blog;
-  const blogs = useAppSelector((state: RootState) => state.blog);
-  const commentDispatch = useAppDispatch();
+  const blogs = useAppSelector((state: RootState) => state.blog.blog);
 
-  
-  const useCommentSelector = useAppSelector(
-    (state: RootState) => state.comments
-  );
   const SingleBlog = blogs.find((item) => item.id === params.blog);
   const [commentVal, setcommentVal] = useState<string>("");
   const [isDisable, setIsDisable] = useState<boolean>(true);
-  
+
   useEffect(() => {
     if (commentVal.trim()) {
       setIsDisable(false);
@@ -46,16 +34,27 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
       setIsDisable(true);
     }
   }, [commentVal]);
-  
-  const setcommentHandler = () => {
-    const commentsObject: Comment = {
-      id: DynamicId,
-      comment: commentVal,
+
+  const dispatch = useAppDispatch();
+  const useCommentSelector = useAppSelector(
+    (state: RootState) => state.comments.comments
+  );
+
+  // Function to handle adding a new comment
+  const handleAddComment = () => {
+    const newComment = {
+      id: Date.now(),
+      text: commentVal,
+      blogId: DynamicId,
     };
-    commentDispatch(addComments(commentsObject));
+
+    dispatch(addComment(newComment));
     setcommentVal("");
   };
-  
+
+  const handleDeleteComment = (commentId: number) => {
+    dispatch(deleteComment(commentId));
+  };
 
   return (
     <div className="md:max-w-[50%] w-auto mx-auto text-justify flex flex-col justify-center items-center gap-4 px-4 md:p-0">
@@ -67,12 +66,9 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
         width={700}
       />
       <p>{SingleBlog?.description}</p>
-
-
-
       <div className="self-start">
         <p className="text-2xl font-bold">
-          <span className="text-lg font-normal text-gray-600 italic mr-1  dark:text-zinc-400">
+          <span className="text-lg font-normal text-gray-600 italic mr-3  dark:text-zinc-400">
             Written By
           </span>
           {SingleBlog?.author}
@@ -91,7 +87,7 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
             <ChatBubbleLeftEllipsisIcon className="h-6 w-6 text-blue-500" />
             <span className="text-gray-600 dark:text-white font-bold">
               {
-                useCommentSelector.filter((item) => item.id === DynamicId)
+                useCommentSelector.filter((item) => item.blogId === DynamicId)
                   .length
               }
             </span>
@@ -107,7 +103,7 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
             value={commentVal}
           />
           <button
-            onClick={() => setcommentHandler()}
+            onClick={() => handleAddComment()}
             disabled={isDisable}
             className="px-4 py-2  bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-400"
           >
@@ -117,31 +113,39 @@ const Bloggers = ({ params }: { params: { blog: string } }) => {
 
         <ul className="space-y-2 mt-2">
           {useCommentSelector
-            .filter((item) => item.id === DynamicId)
+            .filter((item) => item.blogId === DynamicId)
             .map((item) => (
-              <li
-                className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md w-[100%] break-words"
-                key={item.id}
-              >
-                <span className="text-sm flex justify-start gap-2 mb-4 items-center">
-                  {user ? (
-                    <img
-                      src={user.imageUrl}
-                      alt="User Profile"
-                      className="w-5 h-5 rounded-full" 
-                    />
-                  ) : (
-                    <img
-                      src={"/user.png"}
-                      alt="User Profile"
-                      className="w-5 h-5 rounded-full" 
-                    />
-                  )}
+              <div>
+                <li
+                  className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md w-[100%] break-words"
+                  key={item.id}
+                >
+                  <span className="text-sm flex justify-start gap-2 mb-4 items-center">
+                    {user ? (
+                      <img
+                        src={user.imageUrl}
+                        alt="User Profile"
+                        className="w-5 h-5 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src={"/user.png"}
+                        alt="User Profile"
+                        className="w-5 h-5 rounded-full"
+                      />
+                    )}
 
-                  {user ? user.fullName : "User"}
-                </span>{" "}
-                {item.comment.trim()}
-              </li>
+                    {user ? user.fullName : "User"}
+                  </span>{" "}
+                  {item.text.trim()}
+                </li>
+                <button
+                  onClick={() => handleDeleteComment(item.id)}
+                  className="bg-red-500 text-white text-sm px-2 mt-2 py-1  hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-200"
+                >
+                  Remove
+                </button>
+              </div>
             ))}
         </ul>
       </div>
