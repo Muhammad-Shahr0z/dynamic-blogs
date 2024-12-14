@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector } from "@/app/reduxStore/hooks";
 import { addComment, deleteComment } from "@/app/reduxStore/CommentSlice";
 
 const Bloggers = ({ params }: { params: { blog: string } }) => {
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [SetAuthor] = useState<any>(null);
 
   const { user } = useUser();

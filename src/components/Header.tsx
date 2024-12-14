@@ -13,12 +13,12 @@ import {
 import { ModeToggle } from "@/components/drop";
 import { Button } from "@/components/ui/button";
 import { CircleUserRound, FileText, House, Info } from "lucide-react";
-// import { SignInButton } from "@clerk/nextjs";
-// import { UserButton } from '@clerk/clerk-react';
-// import { useUser } from '@clerk/clerk-react';
+import { SignInButton } from "@clerk/nextjs";
+import { UserButton } from '@clerk/clerk-react';
+import { useUser } from '@clerk/clerk-react';
 
 const Header = () => {
-  // const { user } = useUser();
+  const { user } = useUser();
 
   return (
     <header className="mb-8 h-[65px] bg-transparent backdrop-blur-md shadow-md sticky top-0 z-50 caret-transparent dark:border-b-[1px] border-gray-600 flex items-center justify-center">
@@ -70,7 +70,7 @@ const Header = () => {
               <p className="text-xl font-semibold text-blue-600 border-b border-black">
                 {user?.firstName}
               </p>
-              {/* <UserButton/> */}
+              <UserButton/>
             </div>
           )}
 
