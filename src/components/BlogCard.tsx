@@ -1,3 +1,5 @@
+import { removeBlog } from "@/app/reduxStore/BlogSlice";
+import { useAppDispatch } from "@/app/reduxStore/hooks";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +9,7 @@ interface BlogCardProps {
   title: string;
   description: string;
   date: string;
-  id:string|undefined;
+  id: string | undefined;
 }
 
 const BlogCard = ({
@@ -18,8 +20,17 @@ const BlogCard = ({
   date,
   id,
 }: BlogCardProps) => {
+
+
+  const removeBlogDispatch = useAppDispatch();
+  // Handle Delete Blog Function
+const handleDelete = (id:string |undefined)=>{
+  if(!id) return
+  removeBlogDispatch(removeBlog({id}))
+}
+
   return (
-    <div className="md:min-h-[450px] md:max-h-[450px] w-1/1 p-3 rounded-lg shadow-md shadow-slate-700 dark:border-[1px] dark:border-slate-500 dark:shadow-none cursor-pointer">
+    <div className="md:min-h-[450px] md:max-h-[450px] w-1/1 p-3 rounded-t-lg shadow-md shadow-slate-700 dark:border-[1px] dark:border-slate-500 dark:shadow-none cursor-pointer">
       <div className="min-h-48 max-h-48 overflow-hidden bg-gray-600 rounded-lg">
         <Image
           src={image}
@@ -46,12 +57,14 @@ const BlogCard = ({
       </p>
 
       <div className="max-h-12 min-h-12 flex flex-col-reverse gap-2 md:flex-row justify-between items-center mt-4">
-        <Link
-          className="bg-blue-600 py-1 px-3 h-fit rounded-sm text-white text-sm hover:bg-blue-800"
-          href={`/blogs/${id}`}
+        {/* Delete Button */}
+        <button
+          onClick={() => handleDelete(id)}
+          className="border-b-2 py-1 px-4 hover:border-blue-800 hover:text-red-500 text-black tracking-wider dark:text-white dark:hover:text-red-500 text-sm"
         >
-          Read Blog
-        </Link>
+          Delete Blog
+        </button>
+
         <span className="text-sm md:font-semibold text-gray-700 font-normal dark:text-white ">
           Published on : {date}
         </span>

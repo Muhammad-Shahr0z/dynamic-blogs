@@ -1,6 +1,5 @@
 "use client";
-
-import { addComments } from "@/app/reduxStore/BlogSlice";
+import { addComments, removeBlog } from "@/app/reduxStore/BlogSlice";
 import { useAppSelector } from "@/app/reduxStore/hooks";
 import { RootState } from "@/app/reduxStore/Store";
 import Image from "next/image";
@@ -8,23 +7,38 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/app/reduxStore/hooks";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
 import { SendHorizontal, UserCheck } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
-const Bloggers = ({ params }:{ params: { blog: string } }) => {
+const Bloggers = ({ params }: { params: { blog: string } }) => {
+  const [author, SetAuthor] = useState<any>(null);
+
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      SetAuthor(user);
+    } else {
+      SetAuthor("User");
+    }
+  }, [user]);
+
   interface Comment {
     id: string;
     comment: string;
   }
-
+ 
   const DynamicId = params.blog;
   const blogs = useAppSelector((state: RootState) => state.blog);
   const commentDispatch = useAppDispatch();
+
+  
   const useCommentSelector = useAppSelector(
     (state: RootState) => state.comments
   );
   const SingleBlog = blogs.find((item) => item.id === params.blog);
   const [commentVal, setcommentVal] = useState<string>("");
   const [isDisable, setIsDisable] = useState<boolean>(true);
-
+  
   useEffect(() => {
     if (commentVal.trim()) {
       setIsDisable(false);
@@ -32,7 +46,7 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
       setIsDisable(true);
     }
   }, [commentVal]);
-
+  
   const setcommentHandler = () => {
     const commentsObject: Comment = {
       id: DynamicId,
@@ -41,6 +55,7 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
     commentDispatch(addComments(commentsObject));
     setcommentVal("");
   };
+  
 
   return (
     <div className="md:max-w-[50%] w-auto mx-auto text-justify flex flex-col justify-center items-center gap-4 px-4 md:p-0">
@@ -52,6 +67,8 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
         width={700}
       />
       <p>{SingleBlog?.description}</p>
+
+
 
       <div className="self-start">
         <p className="text-2xl font-bold">
@@ -67,7 +84,9 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
 
       <div className="max-w-[100%] mx-auto p-4 border border-gray-300 rounded-md shadow-md min-w-[100%]">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Comments</h2>
+          <h2 className="text-lg font-semibold text-gray-700 dark:text-white">
+            Comments
+          </h2>
           <div className="flex items-center space-x-2">
             <ChatBubbleLeftEllipsisIcon className="h-6 w-6 text-blue-500" />
             <span className="text-gray-600 dark:text-white font-bold">
@@ -100,14 +119,29 @@ const Bloggers = ({ params }:{ params: { blog: string } }) => {
           {useCommentSelector
             .filter((item) => item.id === DynamicId)
             .map((item) => (
- 
               <li
                 className="p-2 border border-gray-200 rounded-md bg-gray-50 dark:text-black text-md w-[100%] break-words"
                 key={item.id}
               >
-            <UserCheck className="inline mr-4 text-blue-600 mb-1" /> {item.comment.trim()}
+                <span className="text-sm flex justify-start gap-2 mb-4 items-center">
+                  {user ? (
+                    <img
+                      src={user.imageUrl}
+                      alt="User Profile"
+                      className="w-5 h-5 rounded-full" 
+                    />
+                  ) : (
+                    <img
+                      src={"/user.png"}
+                      alt="User Profile"
+                      className="w-5 h-5 rounded-full" 
+                    />
+                  )}
+
+                  {user ? user.fullName : "User"}
+                </span>{" "}
+                {item.comment.trim()}
               </li>
-    
             ))}
         </ul>
       </div>

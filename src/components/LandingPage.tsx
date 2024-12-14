@@ -1,7 +1,16 @@
+"use client"
+
 import React from "react";
 import Link from "next/link";
 import Privacy from "./Privacy";
 import { FileText, ShieldQuestion, SquarePen } from "lucide-react";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const LandingPage = () => {
   return (
@@ -15,6 +24,8 @@ const LandingPage = () => {
           stories.
         </p>
       </div>
+
+  
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="p-6 border rounded-lg shadow-lg transition-transform hover:scale-105">

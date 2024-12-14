@@ -95,11 +95,14 @@ export const blogSlice = createSlice({
     addBlog: (state, action: PayloadAction<Blog>) => {
       state.blog.push({ ...action.payload, id: nanoid() });
     },
+    removeBlog: (state, action: PayloadAction<{ id: string }>) => {
+      state.blog = state.blog.filter((blog) => blog.id !== action.payload.id);
+    },
     addComments: (state, action: PayloadAction<Comment>) => {
       state.comments.push(action.payload);
     },
   },
 });
 
-export const { addBlog, addComments } = blogSlice.actions;
+export const { addBlog, addComments,removeBlog } = blogSlice.actions;
 export default blogSlice.reducer;

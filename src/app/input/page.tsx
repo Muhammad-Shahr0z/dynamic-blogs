@@ -1,25 +1,42 @@
 "use client";
-import { FormEvent, useRef, useState } from "react";
+
+
+import { FormEvent, use, useEffect, useRef, useState } from "react";
 import { addBlog } from "../reduxStore/BlogSlice";
 import { useAppDispatch } from "../reduxStore/hooks";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { useUser } from '@clerk/clerk-react';
+import { UserResource } from "@clerk/types";
 
-const BlogInputCard = () => {
+
+const BlogInputCard =  () => {
   const useDispatch = useAppDispatch();
 
   interface Blog {
     image: string;
-    author: string;
+    author: any;
     title: string;
     description: string;
     date: string;
   }
 
+
+  const [author, SetAuthor] = useState<any>(null);
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      SetAuthor(user.fullName);
+    }else{
+      SetAuthor("User");
+    }
+  }, [user]);
+
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [image, setImage] = useState("");
-  const [author, setAurthor] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date().toLocaleString());
@@ -39,23 +56,24 @@ const BlogInputCard = () => {
 
   const FormHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
+  
     const NewDate = new Date().toLocaleString();
     setDate(NewDate);
     const ArrayBlog: Blog = { image, author, title, description, date };
     useDispatch(addBlog(ArrayBlog));
-
-    setAurthor("");
     setTitle("");
     setDescription("");
 
+  
+    
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
 
     toast.success(
       <div className="flex flex-col justify-center items-start gap-1">
-        <div className="">Blog Post Successfully</div>
+        <div className="">Item added to cart successfully!</div>
         <Link
           className="pb-[2px] border-b-2 border-white"
           href="/blogs"
@@ -92,14 +110,7 @@ const BlogInputCard = () => {
           onChange={(e) => LoadImage(e)}
           required
         />
-        <input
-          type="text"
-          placeholder="Author Name"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:bg-gray-600 focus:ring-blue-500"
-          onChange={(e:React.ChangeEvent<HTMLInputElement>) => setAurthor(e.target.value)}
-          value={author}
-          required
-        />
+
         <input
           type="text"
           placeholder="Blog Title"
