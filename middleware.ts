@@ -1,8 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware({
-  secretKey: "sk_test_dRkZMGUo5uOLMwihhdy4FG18YzFN4cLG19gRf3KOAb",
-});
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
